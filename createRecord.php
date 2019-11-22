@@ -21,12 +21,6 @@ if (isset($_POST['create_record'])) {
     $treatment_id = mysqli_real_escape_string($dbc, $_POST['treatment_id']);
     $physician_id = mysqli_real_escape_string($dbc, $_POST['physician_id']);
 
-  //  $tmp = mysqli_query($dbc, "select max(pid) as pid from Project");
- //   $row = $tmp->fetch_assoc();
-//    $pid = $row['pid'] + 1;
-   // $tdate = $_GET["tdate"];
-   // $pid = $_GET["pid"];
-
 //    $uid = $_GET["userid"];
  //   $uid = 'lulu@gmail.com';
   //  $create_time = date("Y-m-d H:i:s");

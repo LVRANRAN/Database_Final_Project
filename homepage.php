@@ -97,7 +97,7 @@ include 'function.php';
                 <li class="active"><a href="homepage.php">Home</a></li>
                 <li><a href="hospitalInfo.php">HospitalInfo</a></li>
                 <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="createRecord.php">create Record</a></li>
+                <li><a href ="record.php">Record</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" action="timeline.php" method="post">
@@ -122,273 +122,53 @@ include 'function.php';
 </div>
 
 
-
-<!-- Header -->
-<header id="top" class="header">
-    <div class="text-vertical-center" style="color:white">
-        <h1>Crowd Funding</h1>
-        <h3>Now it's time for starting your own dream.</h3>
-        <br>
-        <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
-    </div>
-</header>
-
-<!-- About -->
-<section id="about" class="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Fun Fun Funding is the perfect place for your next project!</h2>
-                <p class="lead">
-
-                    <a target="_blank" href="signup.php">Become a menber today</a></p>
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-
-
-<!-- Callout -->
-<aside class="callout">
-    <div class="text-vertical-center">
-
-        <div class="row">
-
-            <h1 class="center title">Explore By Tags</h1>
-            <br/>
-
-
-
-            <div class="center">
-
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Art" role="button">Art</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Books" role="button">Books</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Comedy" role="button">Comedy</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Culture" role="button">Culture</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Dance" role="button">Dance</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Drama" role="button">Drama</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Education" role="button">Education</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Entertainment" role="button">Entertainment</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Fashion" role="button">Fashion</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Fitness" role="button">Fitness</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Food" role="button">Food</a>
-                <br/> <br/>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Games" role="button">Games</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Hiphop" role="button">Hiphop</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Jazz" role="button">Jazz</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Life" role="button">Life</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Movie" role="button">Movie</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Music" role="button">Music</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Mystery" role="button">Mystery</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Photography" role="button">Photography</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Pop" role="button">Pop</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Rock" role="button">Rock</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Sci-Fi" role="button">Sci-Fi</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Show" role="button">Show</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Technology" role="button">Technology</a>
-                <a class="btn btn-success btn-xs" href="tag.php?clicktag=Travel" role="button">Travel</a>
-
-            </div>
-        </div>
-    </div>
-</aside>
-
-
-
-
-<!-- Portfolio -->
-<section id="portfolio" class="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h2>Trending Projects</h2>
-                <p class="lead center">Explore the fantastic ideas with the most sponsorships.</p>
-
-
-                <hr class="small">
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="portfolio-item">
-                            <a href="">
-                                <img class="img-portfolio img-responsive" src="images/portfolio-1.jpg">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="portfolio-item">
-                            <a href="">
-                                <img class="img-portfolio img-responsive" src="images/portfolio-2.jpg">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-                <div class="row marginBottom">
-
-
-                    <?php
-                    $i=0;
-                    $j=0;
-                    ?>
-
-                    <div class="col-md-4 marginTop">
-
-
-
-
-                        <h2><span class="glyphicon glyphicon-music"></span>
-                            <?php
-                            $pnameforp = "";
-
-                            $res = TrendingProjName($conn,$i);
-                            while($row = mysqli_fetch_array($res)) {
-                                echo $row['ProjName'];
-                                $pnameforp = $row['ProjName'];
-                                $i++;
-                            }
-                            ?></h2>
-
-                        <?php
-
-                        $res = TrendingProjDescription($conn,$j);
-                        while($row = mysqli_fetch_array($res)) {
-                            echo $row['Description'];
-                            $j++;
-                        }
-                        ?>
-                        <br/><br/>
-
-
-                        <?php
-
-                        echo "<a href='project.php?projectname=$pnameforp'><button class='btn btn-success marginTop'>Check it out!</button></a>";
-
-                        ?>
-
-                    </div>
-
-                    <div class="col-md-4 marginTop">
-
-                        <h2><span class="glyphicon glyphicon-star"></span>
-                            <?php
-
-                            $pnameforp = "";
-
-                            $res = TrendingProjName($conn,$i);
-                            while($row = mysqli_fetch_array($res)) {
-                                echo $row['ProjName'];
-                                $pnameforp = $row['ProjName'];
-                                $i++;
-                            }
-                            ?></h2>
-
-                        <?php
-
-                        $res = TrendingProjDescription($conn,$j);
-                        while($row = mysqli_fetch_array($res)) {
-                            echo $row['Description'];
-                            $j++;
-                        }
-                        ?>
-                        <br/><br/>
-
-                        <?php
-
-                        echo "<a href='project.php?projectname=$pnameforp'><button class='btn btn-success marginTop'>Check it out!</button></a>";
-
-                        ?>
-
-                    </div>
-
-                    <div class="col-md-4 marginTop">
-
-
-                        <h2><span class="glyphicon glyphicon-heart"></span>
-                            <?php
-
-                            $pnameforp = "";
-
-                            $res = TrendingProjName($conn,$i);
-                            while($row = mysqli_fetch_array($res)) {
-                                echo $row['ProjName'];
-                                $pnameforp = $row['ProjName'];
-                                $i++;
-                            }
-
-
-                            ?></h2>
-
-                        <?php
-
-                        $res = TrendingProjDescription($conn,$j);
-                        while($row = mysqli_fetch_array($res)) {
-                            echo $row['Description'];
-                            $j++;
-                        }
-                        ?>
-                        <br/><br/>
-
-
-                        <?php
-                        /*<button class="btn btn-success marginTop"><a  href="project.php?projectname=$pnameforp">Check it out!</a></button>
-                            <button  onclick="window.location.href='project.php?projectname=$pnameforp'"
-                                         class="btn btn-success marginTop">Check it out!</button>
-                            */
-                        echo "<a href='project.php?projectname=$pnameforp'><button class='btn btn-success marginTop'>Check it out!</button></a>";
-
-
-
-                        ?>
-
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="portfolio-item">
-                            <a href="">
-                                <img class="img-portfolio img-responsive" src="images/portfolio-3.jpg">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="portfolio-item">
-                            <a href="">
-                                <img class="img-portfolio img-responsive" src="images/portfolio-4.jpg">
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.row (nested) -->
-                <a href="hospitalInfo.php" class="btn btn-dark">View More Projects</a>
-            </div>
-            <!-- /.col-lg-10 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-
-
-
-
-    <hr>
-
+<div class="col-xs-12 center">
+    <ul class="categorized_addons">
+        <li class="categorized_addon ga" id="tutorialModule">
+            <a class="content" href="/guide">
+                <img alt="Small" src="img/platform/DataCollectionWizard.png">
+                <h4>Data Collection Guide</h4>
+            </a>
+        </li>
+        <li class="categorized_addon ga" id="bdstModule">
+            <a class="content" data-toggle="modal" id="bdst" href="/f1-layout">
+                <img alt="Small" src="img/platform/DataSubmissionPlatform.png">
+                <h4>Beam Data Submission</h4>
+                <br><br>
+                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
+            </a>
+        </li>
+        <li class="categorized_addon ga" id="SFMModule">
+            <a class="content" data-toggle="modal" id="analysis" href="/data-analysis">
+                <img alt="Small" src="img/platform/DataAnalysis.png">
+                <h4>Data Analysis</h4>
+                <br><br>
+                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
+            </a>
+        </li>
+        <li class="categorized_addon ga" id="manageModule">
+            <a class="content" data-toggle="modal" id="models" href="/management">
+                <img alt="Small" src="img/platform/Management.png">
+                <h4>Model Management</h4>
+                <br><br>
+                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
+            </a>
+        </li>
+        <!-- ngIf: isNotCustomer --><li class="categorized_addon ga ng-scope" id="vctModule" ng-if="isNotCustomer">
+            <a class="content" data-toggle="modal" id="machines" href="/modeling">
+                <img alt="Small" src="img/platform/ModelingStation.png">
+                <h4>Modeling WorkStation</h4>
+                <br><br>
+                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
+            </a>
+        </li><!-- end ngIf: isNotCustomer -->
+        <!-- ngIf: isAdmin -->
+    </ul>
+</div>
+
+
+<hr>
+<hr>
 
 <!-- Footer -->
 <footer>
@@ -397,8 +177,8 @@ include 'function.php';
             <div class="col-lg-10 col-lg-offset-1 text-center">
                 <h4><strong>Powered by</strong>
                 </h4>
-                <p>Renqing Yu
-                    <br>Xiangyu Zhao</p>
+                <p>Ying Ma
+                    <br>Ranran Lyu</p>
             <hr class="small">
                 <p class="text-muted">Copyright &copy; Fun Fun Funding</a></p>
             </div>

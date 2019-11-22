@@ -24,10 +24,6 @@ if (isset($_POST['create_project'])) {
     $row = $tmp->fetch_assoc();
     $pid = $row['pid'] + 1;
 
-//    $uid = $_GET["userid"];
-    $uid = 'lulu@gmail.com';
-    $create_time = date("Y-m-d H:i:s");
-    $status = 'fund_processing';
     if (!$error) {
             if(mysqli_query($dbc, "INSERT INTO Project VALUES($pid, '".$uid."', '".$project_name."', '".$project_description."'
             ,'".$create_time."', '".$minimum_budget."', '".$maximum_budget."', '".$end_crowd_time."', '".$end_project_time."', '".$status."')"))
