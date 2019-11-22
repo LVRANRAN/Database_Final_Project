@@ -4,19 +4,19 @@ session_start();
 include_once 'connection.php';
 
 //$loginuser = $_SESSION['loginuser'];
-$projectID = $_GET["projectID"];
+//$projectID = $_GET["projectID"];
 
-$sql = $dbc->prepare("SELECT * FROM Project WHERE pid='$projectID'");
-$sql -> execute();
-$sql -> bind_result($projid, $uid_project, $project_name, $description, $create_time, $minimum_budget, $maximum_budget, $fundingendtime, $completetime, $project_status);
-$sql->fetch();
-$sql->close();
+//$sql = $dbc->prepare("SELECT * FROM Project WHERE pid='$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($projid, $uid_project, $project_name, $description, $create_time, $minimum_budget, $maximum_budget, $fundingendtime, $completetime, $project_status);
+//$sql->fetch();
+//$sql->close();
 
-$sql = $dbc->prepare("SELECT sum(amount) as amount  FROM Pledge WHERE pid='$projectID'");
-$sql -> execute();
-$sql -> bind_result($fond_received);
-$sql->fetch();
-$sql->close();
+//$sql = $dbc->prepare("SELECT sum(amount) as amount  FROM Pledge WHERE pid='$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($fond_received);
+//$sql->fetch();
+//$sql->close();
 
 $uid = "xixika@gmail.com";  //当前登录用户的id
 
@@ -87,17 +87,17 @@ if(isset($_POST['pledge_amount'])){
     unset($_POST['pledge_amount']);
 }
 
-$sql = $dbc->prepare("SELECT * FROM Project WHERE pid='$projectID'");
-$sql -> execute();
-$sql -> bind_result($projid, $uid_project, $project_name, $description, $create_time, $minimum_budget, $maximum_budget, $fundingendtime, $completetime, $project_status);
-$sql->fetch();
-$sql->close();
+//$sql = $dbc->prepare("SELECT * FROM Project WHERE pid='$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($projid, $uid_project, $project_name, $description, $create_time, $minimum_budget, $maximum_budget, $fundingendtime, $completetime, $project_status);
+//$sql->fetch();
+//$sql->close();
 
-$sql = $dbc->prepare("SELECT sum(amount) as amount  FROM Pledge WHERE pid='$projectID'");
-$sql -> execute();
-$sql -> bind_result($fond_received);
-$sql->fetch();
-$sql->close();
+//$sql = $dbc->prepare("SELECT sum(amount) as amount  FROM Pledge WHERE pid='$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($fond_received);
+//$sql->fetch();
+//$sql->close();
 
 
 if(isset($_POST['rate_star'])){
@@ -145,24 +145,24 @@ if(isset($_POST['like_reason'])) {
 
 
 
-$sql = $dbc->prepare("SELECT sum(star) as stars, count(*) as nums FROM Rate WHERE pid = '$projectID'");
-$sql -> execute();
-$sql -> bind_result($allpoints, $allusers);
-$sql->fetch();
-$sql->close();
-$tmp_allpoints = (int)$allpoints;
-$tmp_allusers = (int)$allusers;
-if ($tmp_allusers == 0) {
-    $rating = "No star";
-} else {
-    $rating = $tmp_allpoints/$tmp_allusers;
-}
+//$sql = $dbc->prepare("SELECT sum(star) as stars, count(*) as nums FROM Rate WHERE pid = '$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($allpoints, $allusers);
+//$sql->fetch();
+//$sql->close();
+//$tmp_allpoints = (int)$allpoints;
+//$tmp_allusers = (int)$allusers;
+//if ($tmp_allusers == 0) {
+//    $rating = "No star";
+//} else {
+//    $rating = $tmp_allpoints/$tmp_allusers;
+//}
 
-$sql = $dbc->prepare("SELECT count(*) FROM Likes WHERE pid='$projectID'");
-$sql -> execute();
-$sql -> bind_result($like_number);
-$sql->fetch();
-$sql->close();
+//$sql = $dbc->prepare("SELECT count(*) FROM Likes WHERE pid='$projectID'");
+//$sql -> execute();
+//$sql -> bind_result($like_number);
+//$sql->fetch();
+//$sql->close();
 
 ?>
 

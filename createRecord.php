@@ -12,44 +12,54 @@ $error = false;
 
 
 //check if form is submitted
-if (isset($_POST['create_project'])) {
-    $project_name = mysqli_real_escape_string($dbc, $_POST['project_name']);
-    $project_description = mysqli_real_escape_string($dbc, $_POST['project_description']);
-    $minimum_budget = mysqli_real_escape_string($dbc, $_POST['minimum_budget']);
-    $maximum_budget = mysqli_real_escape_string($dbc, $_POST['maximum_budget']);
-    $end_crowd_time = mysqli_real_escape_string($dbc, $_POST['end_crowd_time']);
-    $end_project_time = mysqli_real_escape_string($dbc, $_POST['end_project_time']);
+if (isset($_POST['create_record'])) {
+    $patient_id = mysqli_real_escape_string($dbc, $_POST['patient_id']);
+    $patient_name = mysqli_real_escape_string($dbc, $_POST['patient_name']);
+    $treatment_date = mysqli_real_escape_string($dbc, $_POST['treatment_date']);
+    $treatment_frequency = mysqli_real_escape_string($dbc, $_POST['treatment_frequency']);
+    $treatment_status = mysqli_real_escape_string($dbc, $_POST['treatment_status']);
+    $treatment_id = mysqli_real_escape_string($dbc, $_POST['treatment_id']);
+    $physician_id = mysqli_real_escape_string($dbc, $_POST['physician_id']);
 
-    $tmp = mysqli_query($dbc, "select max(pid) as pid from Project");
-    $row = $tmp->fetch_assoc();
-    $pid = $row['pid'] + 1;
+  //  $tmp = mysqli_query($dbc, "select max(pid) as pid from Project");
+ //   $row = $tmp->fetch_assoc();
+//    $pid = $row['pid'] + 1;
+   // $tdate = $_GET["tdate"];
+   // $pid = $_GET["pid"];
 
 //    $uid = $_GET["userid"];
-    $uid = 'lulu@gmail.com';
-    $create_time = date("Y-m-d H:i:s");
-    $status = 'fund_processing';
-    if (!$error) {
-        if(mysqli_query($dbc, "INSERT INTO Project VALUES($pid, '".$uid."', '".$project_name."', '".$project_description."'
-            ,'".$create_time."', '".$minimum_budget."', '".$maximum_budget."', '".$end_crowd_time."', '".$end_project_time."', '".$status."')"))
-        {
-            $successmsg = "Successfully Registered! <a href='project.php?projectID=$pid'>Click here to View Project</a>";
+ //   $uid = 'lulu@gmail.com';
+  //  $create_time = date("Y-m-d H:i:s");
+  //  $status = 'fund_processing';
+    //if (!$error) {
+    //    if(mysqli_query($dbc, "INSERT INTO patient_treatment VALUES($treatment_date,$treatment_frequency,$treatment_status,$physician_id,$patient_id,$treatment_id)"))
+    //    {
+    //        $successmsg = "Successfully Registered! <a href='project.php?projectID=$pid'>Click here to View Project</a>";
+    //    } else {
+    //        $errormsg = "Error in registering...Please try again later!";
+    //    }
+   // }
+    if(!$error) {
+        $sql ="INSERT INTO patient_treatment VALUES($treatment_date,'".$treatment_frequency."','".$treatment_status."','".$physician_id."','".$patient_id."','".$treatment_id."')";
+        mysqli_query($dbc, $sql);
+        if($dbc->query($sql) == TRUE){
+            $successmsg =  "New record inserted successfully!";
         } else {
-            $errormsg = "Error in registering...Please try again later!";
+            $errormsg =  "Error in creating record, please check what you have entered!";
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Registration Script</title>
+    <title>Create Record</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" >
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- add header -->
@@ -60,7 +70,7 @@ if (isset($_POST['create_project'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Crowdfunding</a>
+            <a class="navbar-brand" href="homepage.php">Crowdfunding</a>
         </div>
         <!-- menu items -->
         <!--<div class="collapse navbar-collapse" id="navbar1">
@@ -74,49 +84,58 @@ if (isset($_POST['create_project'])) {
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 well">
-            <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="signupform">
+        <div class="col-md-4 col-md-offset-4 col-no-padding well">
+            <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="createrecordform">
                 <fieldset>
-                    <legend>Create Project</legend>
+                    <legend>Create Record</legend>
+                    <div class="form-group">
+                        <label for="pid">Patient ID</label>
+                        <input type="number" name="patient_id" placeholder="Patient ID" required value="<?php if($error) echo $patient_id; ?>" class="form-control" />
+                        <span class="text-danger"><?php if (isset($patient_id_error)) echo $patient_id_error; ?></span>
+                    </div>
+                    <div class="form-group">
+                            <label for="pname">Patient Name</label>
+                            <input type="text" name="patient_name" placeholder="Full Name" required value="<?php if($error) echo $patient_name; ?>" class="form-control" />
+                            <span class="text-danger"><?php if (isset($patient_name_error)) echo $patient_name_error; ?></span>
+                    </div>
+
 
                     <div class="form-group">
-                        <label for="name">Project name</label>
-                        <input type="text" name="project_name" placeholder="a good name is half of success" required value="<?php if($error) echo $name; ?>" class="form-control" />
-                        <span class="text-danger"><?php if (isset($project_name_error)) echo $project_name_error; ?></span>
+                        <label for="tdate">Treatment Time</label>
+                        <input type="datetime-local" name="treatment_date" placeholder="enter the treatment date"  value="<?php if($error) echo $treatment_date; ?>" class="form-control" />
+                        <span class="text-danger"><?php if (isset($treatment_date_error)) echo $treatment_date_error; ?></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Project Description</label>
-                        <input type="text" name="project_description" placeholder="make a good description" required value="<?php if($error) echo $email; ?>" class="form-control" />
-                        <span class="text-danger"><?php if (isset($project_description_error)) echo $project_description_error; ?></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Minimum budget</label>
-                        <input type="number" name="minimum_budget" placeholder="minimum budget you need" required class="form-control" />
+                        <label for="tfreq">treatment frequency</label>
+                        <input type="number" name="treatment_frequency" placeholder="total treatment frequency" required class="form-control" />
                         <span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Maximum budget</label>
-                        <input type="number" name="maximum_budget" placeholder="maximum budget you need" required class="form-control" />
-                        <span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+                        <label for="tstatus">Treatment Status</label>
+                        <select class = "form-control" name="treatment_status" required class="form-control">
+                            <option value = "S">S</option>
+                            <option value = "F">F</option>
+                            <option value = "R">R</option>
+                        </select>
+                        <span class="text-danger"><?php if (isset($treatment_status_error)) echo $treatment_status_error; ?></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Ending time for crowd funding</label>
-                        <input type="datetime-local" name="end_crowd_time" placeholder="make a good description"  value="<?php if($error) echo $email; ?>" class="form-control" />
-                        <span class="text-danger"><?php if (isset($project_description_error)) echo $project_description_error; ?></span>
+                        <label for="tid">Treatment ID</label>
+                        <input type="number" name="treatment_id" placeholder="treatment id" required class="form-control" />
+                        <span class="text-danger"><?php if (isset($treatment_id_error)) echo $treatment_id_error; ?></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Ending time for whole project</label>
-                        <input type="datetime-local" name="end_project_time" placeholder="make a good description"  value="<?php if($error) echo $email; ?>" class="form-control" />
-                        <span class="text-danger"><?php if (isset($project_description_error)) echo $project_description_error; ?></span>
+                        <label for="phid">Physician ID</label>
+                        <input type="number" name="physician_id" placeholder="physician id" required class="form-control" />
+                        <span class="text-danger"><?php if (isset($physician_id_error)) echo $physician_id_error; ?></span>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" name="create_project" value="Create Project" class="btn btn-primary" />
+                        <input type="submit" name="create_record" value="Create Record" class="btn btn-primary" />
                     </div>
                 </fieldset>
             </form>
@@ -130,7 +149,7 @@ if (isset($_POST['create_project'])) {
         </div>
     </div>-->
 </div>
-<script src="js/jquery-1.10.2.js"></script>
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

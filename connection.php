@@ -5,8 +5,4 @@
         echo 'Failed to connect to MySQL: '.mysqli_connect_error();
     }
 
-$projectID = 30;
-
-
-?>
-
+//$projectID = 30;
