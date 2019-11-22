@@ -1,0 +1,39 @@
+{
+  "_from": "jquery-1.10.2",
+  "_id": "jquery-1.10.2@1.10.2",
+  "_inBundle": false,
+  "_integrity": "sha512-2JfnC/6Hrh6VxElZDVo0D5nXbhZGSXrlgpEYaIaHXMiBiSls7wIZspGcOzoQLo/W0PMfb5QXE6otXHIk5TzCqA==",
+  "_location": "/jquery-1.10.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "jquery-1.10.2",
+    "name": "jquery-1.10.2",
+    "escapedName": "jquery-1.10.2",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-1.10.2/-/jquery-1.10.2-1.10.2.tgz",
+  "_shasum": "b5f7ec2efb91014d04ca4ba5e0e612f5e476d160",
+  "_spec": "jquery-1.10.2",
+  "_where": "C:\\xampp\\htdocs\\Database_Final_Project",
+  "author": {
+    "name": "Cata"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "jQuery 1.10.2",
+  "license": "ISC",
+  "main": "jquery-1.10.2.min.js",
+  "name": "jquery-1.10.2",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.10.2"
+}
