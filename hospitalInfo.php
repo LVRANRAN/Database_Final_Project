@@ -94,7 +94,8 @@ include 'function.php';
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
                 <li class="active"><a href="hospitalInfo.php">HospitalInfo</a></li>
-                <li><a href ="fundrequest.php">Start a project</a></li>
+                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" action="timeline.php" method="post">

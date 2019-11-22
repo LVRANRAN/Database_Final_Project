@@ -95,8 +95,9 @@ include 'function.php';
 
             <ul class ="nav navbar-nav">
                 <li class="active"><a href="homepage.php">Home</a></li>
-                <li><a href="hospital.php">HospitalInfo</a></li>
-                <li><a href ="fundrequest.php">Disease & Treatment</a></li>
+                <li><a href="hospitalInfo.php">HospitalInfo</a></li>
+                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
+                <li><a href ="createRecord.php">create Record</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" action="timeline.php" method="post">
@@ -374,7 +375,7 @@ include 'function.php';
 
                 </div>
                 <!-- /.row (nested) -->
-                <a href="explore.php" class="btn btn-dark">View More Projects</a>
+                <a href="hospitalInfo.php" class="btn btn-dark">View More Projects</a>
             </div>
             <!-- /.col-lg-10 -->
         </div>
