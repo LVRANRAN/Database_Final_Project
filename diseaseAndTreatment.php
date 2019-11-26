@@ -13,6 +13,7 @@ include 'function.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>FunFunFunding</title>
@@ -74,7 +75,7 @@ include 'function.php';
 </head>
 <body>
 
-
+//top navigator
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
 
@@ -115,8 +116,15 @@ include 'function.php';
     </div>
 </div>
 
-
-//new
+<div class="btn-group">
+    <button class="btn btn-sm btn-primary dropdown-toggle btn-group-ModelManagement" data-toggle="dropdown" ng-disabled="!sectionVM.canView">Download&nbsp;&nbsp;<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <li><a ng-href="/download-file/ac44636f-7b64-4983-9328-57023448c485"" class="ng-scope" href="/download-file/ac44636f-7b64-4983-9328-57023448c485">Scan Data</a></li>
+        <li>a href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=cc" ng-href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=cc"  class="ng-scope">CCC XML</a></li>
+        <li><a href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=Monaco-eMC" ng-href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=Monaco-eMC" class="ng-scope">Monaco-eMC XML</a></li>
+    </ul>
+</div>
+//database table
 <script type="text/javascript" src="js/indexb.js"></script>
 <!--banner-->
 <table width="798" border="0" cellpadding="0" cellspacing="0">
@@ -149,19 +157,20 @@ include 'function.php';
         while ($rows = mysqli_fetch_array($result))
         {
             ?>
-            <tr>
-                <td height="25" align="center" class="m_td">
-                    <input type=checkbox name="chk[]" id="chk" value=".$rows['deid'].">
-                </td>
-                <td height="25" align="center" class="m_td"><?php echo $rows['deid'];?></td>
-                <td height="25" align="center" class="m_td"><?php echo $rows['dename'];?></td>
-                <td class="m_td"><a href="#" rel="external nofollow" onClick="del(<?php echo $rows['deid'];?>)">del</a></td>
+            <tr ng-repeat="disease in diseases" ng-class="ng-scope">
+                <td height="25" align="center" class="ng-binding ng-scope info" ng-model="disease.id"><?php echo $rows['deid'];?></td>
+                <td height="25" align="center" class="ng-binding ng-scope info" ng-model="disease.name"><?php echo $rows['dename'];?></td>
             </tr>
             <?php
         }
         ?>
 
-
+<script>
+    $scope.diseases = [{id: "",name:""}];
+    $scope.delDisease = function($index){
+        $scope.diseases.splice($index, 1);
+    }
+</script>
 
 
         <tr>

@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-//if(isset($_SESSION['admin'])) {
-//    header("Location: homepage.php");
-//}
-
 include_once 'connection.php';
 date_default_timezone_set("America/New_York");
 //set validation error flag as false
@@ -54,27 +50,6 @@ if (isset($_POST['create_disease'])) {
 </head>
 
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <!-- add header -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="homepage.php">Crowdfunding</a>
-        </div>
-        <!-- menu items -->
-        <!--<div class="collapse navbar-collapse" id="navbar1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php">Login</a></li>
-                <li class="active"><a href="register.php">Sign Up</a></li>
-            </ul>
-        </div>-->
-    </div>
-</nav>
 
 <div class="container">
     <div class="row">

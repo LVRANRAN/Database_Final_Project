@@ -13,13 +13,24 @@ $error = false;
 //check if form is submitted
 if (isset($_POST['signup'])) {
     echo "this is good";
-    $name = mysqli_real_escape_string($dbc, $_POST['name']);
+    $urole = mysqli_real_escape_string($dbc, $_POST['urole']);
+    $fname = mysqli_real_escape_string($dbc, $_POST['fname']);
+    $lname = mysqli_real_escape_string($dbc, $_POST['lname']);
+    $department_id = mysqli_real_escape_string($dbc, $_POST['department_id']);
     $email = mysqli_real_escape_string($dbc, $_POST['email']);
     $password = mysqli_real_escape_string($dbc, $_POST['password']);
     $cpassword = mysqli_real_escape_string($dbc, $_POST['cpassword']);
 
+    $tmp = mysqli_query($dbc,"select max(UID) as uid from users");
+    $row = $tmp->fetch_assoc();
+    $uid = $row['uid'] + 1;
+
     //name can contain only alpha characters and space
-    if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
+    if (!preg_match("/^[a-zA-Z ]+$/",$fname)) {
+        $error = true;
+        $name_error = "Name must contain only alphabets and space";
+    }
+    if (!preg_match("/^[a-zA-Z ]+$/",$lname)) {
         $error = true;
         $name_error = "Name must contain only alphabets and space";
     }
@@ -36,7 +47,7 @@ if (isset($_POST['signup'])) {
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
     if (!$error) {
-        if(mysqli_query($dbc, "INSERT INTO User(uid,uname,password) VALUES('" . $email . "','" . $name . "','" . md5($password) . "')")) {
+        if(mysqli_query($dbc, "INSERT INTO users VALUES($uid,'" . $fname . "','" . $lname . "','" . $urole . "','" . $department_id . "','" . $email . "','" . md5($password) . "')")) {
             $successmsg = "Successfully Registered! <a href='homepage.php'>Click here to Login</a>";
         } else {
             $errormsg = "Error in registering...Please try again later!";
@@ -84,9 +95,34 @@ if (isset($_POST['signup'])) {
                     <legend>Sign Up</legend>
 
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" placeholder="Enter Full Name" required value="<?php if($error) echo $name; ?>" class="form-control" />
-                        <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+                        <label for="urole">Role</label>
+                        <select class = "form-control" name="urole" required class="form-control">
+                            <option value = "DBA">DBA</option>
+                            <option value = "BA">BA</option>
+                            <option value = "RESEARCHER">RESEARCHER</option>
+                            <option value = "PROFESSOR">PROFESSOR</option>
+                            <option value = "MANAGER">MANAGER</option>
+                            <option value = "EXECUTIVE">EXECUTIVE</option>
+                        </select>
+                        <span class="text-danger"><?php if (isset($user_role_error)) echo $user_role_error; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" name="fname" placeholder="Enter First Name" required value="<?php if($error) echo $fname; ?>" class="form-control" />
+                        <span class="text-danger"><?php if (isset($fname_error)) echo $fname_error; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" name="lname" placeholder="Enter Last Name" required value="<?php if($error) echo $lname; ?>" class="form-control" />
+                        <span class="text-danger"><?php if (isset($lname_error)) echo $lname_error; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="did">Department ID</label>
+                        <input type="number" name="department_id" placeholder="department id" required class="form-control" />
+                        <span class="text-danger"><?php if (isset($department_id_error)) echo $department_id_error; ?></span>
                     </div>
 
                     <div class="form-group">
@@ -122,7 +158,7 @@ if (isset($_POST['signup'])) {
         </div>
     </div>-->
 </div>
-<script src="js/jquery-1.10.2.js"></script>
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
