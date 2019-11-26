@@ -10,7 +10,6 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
 
-
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
