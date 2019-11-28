@@ -2,6 +2,7 @@
 
 session_start();
 $email = $_SESSION['email'];
+$role = $_SESSION['role'];
 include 'connection.php';
 
 $deid = "";
@@ -214,8 +215,8 @@ while($row = mysqli_fetch_array($result))
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
                 <li  class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
-                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="record.php">Record</a></li>
+                <li><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
             <ul class ="nav navbar-nav">
                 <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>

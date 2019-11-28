@@ -1,6 +1,7 @@
 <?php
 session_start();
 $email = $_SESSION['email'];
+$role = $_SESSION['role'];
 include 'connection.php';
 
 $hid ="";
@@ -255,11 +256,11 @@ while($row = mysqli_fetch_array($result))
         </div>
         <div class="collapse navbar-collapse">
 
-            <ul class ="nav navbar-nav">
+            <ul class ="nav navbar-nav" id="ul1">
                 <li><a href="homepage.php">Home</a></li>
-                <li  class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
-                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="record.php">Record</a></li>
+                <li class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li id = <?php echo "$role"?>><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
             <ul class ="nav navbar-nav">
                 <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
@@ -284,5 +285,8 @@ while($row = mysqli_fetch_array($result))
         <input type="submit" name="search" value="Find">
     </div>
 </form>
+<script>
+    document.getElementById("BA").remove();
+</script>
 </body>
 </html>
