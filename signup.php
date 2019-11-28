@@ -1,18 +1,13 @@
 <?php
 session_start();
-
-//if(isset($_SESSION['admin'])) {
-//    header("Location: homepage.php");
-//}
-
 include_once 'connection.php';
-
+date_default_timezone_set("America/New_York");
 //set validation error flag as false
 $error = false;
 
+
 //check if form is submitted
 if (isset($_POST['signup'])) {
-    echo "this is good";
     $urole = mysqli_real_escape_string($dbc, $_POST['urole']);
     $fname = mysqli_real_escape_string($dbc, $_POST['fname']);
     $lname = mysqli_real_escape_string($dbc, $_POST['lname']);
@@ -25,14 +20,13 @@ if (isset($_POST['signup'])) {
     $row = $tmp->fetch_assoc();
     $uid = $row['uid'] + 1;
 
-    //name can contain only alpha characters and space
     if (!preg_match("/^[a-zA-Z ]+$/",$fname)) {
         $error = true;
-        $name_error = "Name must contain only alphabets and space";
+        $fname_error = "Name must contain only alphabets and space";
     }
     if (!preg_match("/^[a-zA-Z ]+$/",$lname)) {
         $error = true;
-        $name_error = "Name must contain only alphabets and space";
+        $lname_error = "Name must contain only alphabets and space";
     }
     if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
         $error = true;
@@ -47,7 +41,7 @@ if (isset($_POST['signup'])) {
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
     if (!$error) {
-        if(mysqli_query($dbc, "INSERT INTO users VALUES($uid,'" . $fname . "','" . $lname . "','" . $urole . "','" . $department_id . "','" . $email . "','" . md5($password) . "')")) {
+        if(mysqli_query($dbc,"INSERT INTO users VALUES($uid,'".$fname."','".$lname."','".$urole."',$department_id,'".$email."','".md5($password)."')")) {
             $successmsg = "Successfully Registered! <a href='homepage.php'>Click here to Login</a>";
         } else {
             $errormsg = "Error in registering...Please try again later!";
@@ -59,41 +53,19 @@ if (isset($_POST['signup'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Registration Script</title>
+    <title>Create Record</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" >
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 </head>
-<body>
 
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <!-- add header -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php">Crowdfunding</a>
-        </div>
-        <!-- menu items -->
-        <!--<div class="collapse navbar-collapse" id="navbar1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php">Login</a></li>
-                <li class="active"><a href="register.php">Sign Up</a></li>
-            </ul>
-        </div>-->
-    </div>
-</nav>
+<body>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 well">
-            <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="signupform">
+        <div class="col-md-4 col-md-offset-4 col-no-padding well">
+            <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="createrecordform">
                 <fieldset>
                     <legend>Sign Up</legend>
-
                     <div class="form-group">
                         <label for="urole">Role</label>
                         <select class = "form-control" name="urole" required class="form-control">
@@ -152,11 +124,6 @@ if (isset($_POST['signup'])) {
             <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
         </div>
     </div>
-    <!--<div class="row">
-        <div class="col-md-4 col-md-offset-4 text-center">
-        Already Registered? <a href="login.php">Login Here</a>
-        </div>
-    </div>-->
 </div>
 <script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
