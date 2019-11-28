@@ -1,7 +1,7 @@
 <?php
 session_start();
+$email = $_SESSION['email'];
 include 'connection.php';
-include 'function.php';
 ?>
 
 
@@ -12,7 +12,6 @@ include 'function.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 
     <title>FunFunFunding</title>
 
@@ -26,10 +25,8 @@ include 'function.php';
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
 
     <style>
 
@@ -95,77 +92,17 @@ include 'function.php';
 
             <ul class ="nav navbar-nav">
                 <li class="active"><a href="homepage.php">Home</a></li>
-                <li><a href="hospitalInfo.php">HospitalInfo</a></li>
+                <li><a href="datamanipulation.php">Data Manipulation</a></li>
                 <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
                 <li><a href ="record.php">Record</a></li>
             </ul>
-
-            <form class="navbar-form navbar-right" action="timeline.php" method="post">
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" name="loginname"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="*****" name="loginpassword"/>
-                    </div>
-                    <input type="submit" class="btn btn-success" name="submit" value="Log in"/>
-
-                <button type="button" class ="btn btn-danger" onclick="window.location.href='signup.php'">Sign Up</button>
-
-            </form>
-
-
+            <ul class ="nav navbar-nav">
+                <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
+            </ul>
 
         </div>
     </div>
 </div>
-
-
-<div class="col-xs-12 center">
-    <ul class="categorized_addons">
-        <li class="categorized_addon ga" id="tutorialModule">
-            <a class="content" href="/guide">
-                <img alt="Small" src="img/platform/DataCollectionWizard.png">
-                <h4>Data Collection Guide</h4>
-            </a>
-        </li>
-        <li class="categorized_addon ga" id="bdstModule">
-            <a class="content" data-toggle="modal" id="bdst" href="/f1-layout">
-                <img alt="Small" src="img/platform/DataSubmissionPlatform.png">
-                <h4>Beam Data Submission</h4>
-                <br><br>
-                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
-            </a>
-        </li>
-        <li class="categorized_addon ga" id="SFMModule">
-            <a class="content" data-toggle="modal" id="analysis" href="/data-analysis">
-                <img alt="Small" src="img/platform/DataAnalysis.png">
-                <h4>Data Analysis</h4>
-                <br><br>
-                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
-            </a>
-        </li>
-        <li class="categorized_addon ga" id="manageModule">
-            <a class="content" data-toggle="modal" id="models" href="/management">
-                <img alt="Small" src="img/platform/Management.png">
-                <h4>Model Management</h4>
-                <br><br>
-                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
-            </a>
-        </li>
-        <!-- ngIf: isNotCustomer --><li class="categorized_addon ga ng-scope" id="vctModule" ng-if="isNotCustomer">
-            <a class="content" data-toggle="modal" id="machines" href="/modeling">
-                <img alt="Small" src="img/platform/ModelingStation.png">
-                <h4>Modeling WorkStation</h4>
-                <br><br>
-                <p class="summary subscribe ng-hide" ng-show="isSubscribe">Apply</p>
-            </a>
-        </li><!-- end ngIf: isNotCustomer -->
-        <!-- ngIf: isAdmin -->
-    </ul>
-</div>
-
 
 <hr>
 <hr>
@@ -188,17 +125,7 @@ include 'function.php';
 </footer>
 
 
-
-
-
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include individual files as needed -->
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.js"></script>
-
             <script>
-
                 $(".contentContainer").css("min-height",$(window).height());
 
                 // Scrolls to the selected menu item on the page
@@ -241,10 +168,12 @@ include 'function.php';
                         }
                     }
                 });
-
             </script>
-
-
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.js"></script>
 </body>
 </html>
