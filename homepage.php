@@ -1,7 +1,8 @@
 <?php
 session_start();
-$email = $_SESSION['email'];
 include 'connection.php';
+$email = $_SESSION['email'];
+$role = $_SESSION['role'];
 ?>
 
 
@@ -92,9 +93,9 @@ include 'connection.php';
 
             <ul class ="nav navbar-nav">
                 <li class="active"><a href="homepage.php">Home</a></li>
-                <li><a href="datamanipulation.php">Data Manipulation</a></li>
-                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="record.php">Record</a></li>
+                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
             <ul class ="nav navbar-nav">
                 <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
@@ -126,6 +127,8 @@ include 'connection.php';
 
 
             <script>
+                document.getElementById("BA").remove();
+
                 $(".contentContainer").css("min-height",$(window).height());
 
                 // Scrolls to the selected menu item on the page

@@ -1,8 +1,69 @@
 <?php
-
 session_start();
+$email = $_SESSION['email'];
+$role = $_SESSION['role'];
 include 'connection.php';
 include 'function.php';
+
+$dataM = 8 ;
+$dataT = 8;
+$dataW = 8;
+$dataS = 8;
+
+$PM = 8;
+$PW = 8;
+$PS = 8;
+
+$sql1 = "select count(*) from `patient` ";
+
+$resultT=mysqli_query($dbc,$sql1);
+while($rowT=mysqli_fetch_row($resultT))
+{
+    //echo $rowT[0];
+    $dataT = $rowT[0];
+    echo "<br/>";
+}
+
+$sql2 = "select count(PSTATUS) from `patient` where PSTATUS='M' ";
+
+$resultM=mysqli_query($dbc,$sql2);
+while($rowM=mysqli_fetch_row($resultM))
+{
+    //echo $rowM[0];
+    $dataM = $rowM[0];
+    echo "<br/>";
+
+}
+
+$sql3 = "select count(PSTATUS) from `patient` where PSTATUS='W' ";
+
+$resultW=mysqli_query($dbc,$sql3);
+while($rowW=mysqli_fetch_row($resultW))
+{
+    //echo $rowW[0];
+    $dataW = $rowW[0];
+    echo "<br/>";
+
+}
+
+$sql4 = "select count(PSTATUS) from `patient` where PSTATUS='S' ";
+
+$resultS=mysqli_query($dbc,$sql4);
+
+while($rowS=mysqli_fetch_row($resultS))
+{
+    //echo $rowS[0];
+    $dataS = $rowS[0];
+    echo "<br/>";
+
+}
+$PM = $dataM/$dataT;
+$PW = $dataW/$dataT;
+$PS = $dataS/$dataT;
+
+$PM=round($PM,2);
+$PW=round($PW,2);
+$PS=round($PS,2);
 ?>
 
 
@@ -75,7 +136,6 @@ include 'function.php';
 </head>
 <body>
 
-//top navigator
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
 
@@ -94,98 +154,76 @@ include 'function.php';
         <div class="collapse navbar-collapse">
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li><a href="hospitalInfo.php">HospitalInfo</a></li>
-                <li class="active"><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="record.php">Record</a></li>
+                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li class="active"><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
-
-            <form class="navbar-form navbar-right" action="timeline.php" method="post">
-
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" name="loginname"/>
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="*****" name="loginpassword"/>
-                </div>
-                <input type="submit" class="btn btn-success" name="submit" value="Log in"/>
-
-                <button type="button" class ="btn btn-danger" onclick="window.location.href='signup.php'">Sign Up</button>
-            </form>
+            <ul class ="nav navbar-nav">
+                <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
+            </ul>
         </div>
     </div>
 </div>
-
-<div class="btn-group">
-    <button class="btn btn-sm btn-primary dropdown-toggle btn-group-ModelManagement" data-toggle="dropdown" ng-disabled="!sectionVM.canView">Download&nbsp;&nbsp;<span class="caret"></span></button>
-    <ul class="dropdown-menu">
-        <li><a ng-href="/download-file/ac44636f-7b64-4983-9328-57023448c485"" class="ng-scope" href="/download-file/ac44636f-7b64-4983-9328-57023448c485">Scan Data</a></li>
-        <li>a href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=cc" ng-href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=cc"  class="ng-scope">CCC XML</a></li>
-        <li><a href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=Monaco-eMC" ng-href="/oncentra/generate-xml?id=5dd832845d75e7358c717fd3&amp;algorithm=Monaco-eMC" class="ng-scope">Monaco-eMC XML</a></li>
-    </ul>
-</div>
-//database table
-<script type="text/javascript" src="js/indexb.js"></script>
-<!--banner-->
-<table width="798" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td height="112" background="images/banner.jpg"></td>
-    </tr>
-</table>
-<table width="780" border="0" cellpadding="0" cellspacing="0">
-    <form name="form1" id="form1" method="post" action="del.php">
-        <tr>
-            <td height="20" width="5%" class="top"> </td>
-
-            <td width="5%" class="top">deid</td>
-            <td width="30%" class="top">dename</td>
-            <td width="10%" class="top">operation</td>
-
-        </tr>
-        <?php
-
-        /*mysql_select_db("disease",$con);
-         $result = mysql_query ("select * from disease");
-
-        echo "<table border='auto' width ='auto' height='auto'>
-        <tr>
-        <th>DISEASE ID</th><th>DISEASE NAME</th>
-        <th>";*/
-        $sqlstr1 = "select * from disease order by deid";//按id的升序查询表tb_demo02的数据
-        $result = mysqli_query($dbc,$sqlstr1);//执行查询语句
-
-        while ($rows = mysqli_fetch_array($result))
-        {
-            ?>
-            <tr ng-repeat="disease in diseases" ng-class="ng-scope">
-                <td height="25" align="center" class="ng-binding ng-scope info" ng-model="disease.id"><?php echo $rows['deid'];?></td>
-                <td height="25" align="center" class="ng-binding ng-scope info" ng-model="disease.name"><?php echo $rows['dename'];?></td>
-            </tr>
-            <?php
-        }
-        ?>
-
+<div> <p>   patient status statistics </p></div>
+<canvas id="canvas"></canvas>
 <script>
-    $scope.diseases = [{id: "",name:""}];
-    $scope.delDisease = function($index){
-        $scope.diseases.splice($index, 1);
-    }
+
+    (function () {
+        var data = [{
+            "value":<?php echo "$PM" ?>,
+            //"color":"#FFCC66",
+            "color":"red",
+            "name":"M"
+        },{
+            "value":<?php echo "$PW" ?>,
+            // "color":"#CC0000",
+            "color":"green",
+            "name":"W"
+        },{
+            "value":<?php echo"$PS" ?>,
+            // "color":"#99CCFF",
+            "color":"blue",
+            "name":"S"
+        }/*,{
+            "value":"0.1",
+            "color":"grey",
+            "name":"PHP"
+        }*/];
+        var canvas = document.getElementById("canvas");
+        //设置宽高不从css中设置
+        canvas.width = 600;//设置canvas宽
+        canvas.height = 600;//设置canvas高
+        //canvas.style.border = "1px solid red";
+        //获取上下文
+        var ctx = canvas.getContext("2d");
+        //画图
+        var x0  = 300,y0 = 300;//圆心
+        var x,y;//文字放置位置
+        var radius = 100;
+        var tempAngle = -90;//画圆的起始角度
+        for(var i = 0;i<data.length;i++){
+            var startAngle = tempAngle*Math.PI/180;//起始弧度
+            var angle = data[i].value*360;
+            var endAngle = (tempAngle+angle)*Math.PI/180;//结束弧度
+            var textAngle = tempAngle + 0.5*angle;//文字放的角度
+            x = x0 + Math.cos(textAngle*Math.PI/180)*(radius+20);//文字放的X轴
+            y = y0 + Math.sin(textAngle*Math.PI/180)*(radius+20);//文字放的Y轴
+            //如果文字在圆形的左侧，那么让文字 对齐方式为 文字结尾对齐当前坐标。
+            if( textAngle > 90 && textAngle < 270 ) {
+                ctx.textAlign = 'end';
+            }
+            var text = data[i].name + " "+ data[i].value*100+"%";
+            ctx.fillText(text,x,y);
+            ctx.beginPath();
+            ctx.moveTo(x0,y0);
+            ctx.fillStyle = data[i].color;
+
+            ctx.arc(x0,y0,radius,startAngle,endAngle);
+            ctx.fill();
+            tempAngle += angle;
+        }
+    }());
 </script>
-
-
-        <tr>
-            <td height="25" colspan="7" class="m_td" align="left">  </td>
-        </tr>
-    </form>
-</table>
-<!--show-->
-<table width="798" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td height="48" background="images/bottom.jpg"> </td>
-    </tr>
-</table>
-
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -195,6 +233,7 @@ include 'function.php';
 <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
 
 <script>
+    document.getElementById("BA").remove();
 
     $(".contentContainer").css("min-height",$(window).height());
 

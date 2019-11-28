@@ -2,6 +2,7 @@
 
 session_start();
 $email = $_SESSION['email'];
+$role = $_SESSION['role'];
 include 'connection.php';
 ?>
 
@@ -11,8 +12,6 @@ include 'connection.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.staticfile.org/angular.js/1.7.0/angular.min.js"></script>
-    <script src="https://cdn.staticfile.org/angular.js/1.7.0/angular-route.min.js"></script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>FunFunFunding</title>
@@ -31,6 +30,43 @@ include 'connection.php';
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
     <style>
+        .title{
+            color: #FFFFFF;
+        }
+
+        .navbar-brand{
+            font-size: 1.8em;
+        }
+
+
+        #topRow h1 {
+            font-size: 300%;
+
+        }
+
+        .center{
+            text-align: center;
+        }
+
+        .title{
+            margin-top: 100px;
+            font-size: 300%;
+        }
+
+        #footer {
+            background-color: #B0D1FB;
+        }
+
+        .marginBottom{
+            margin-bottom: 30px;
+        }
+
+        .tagcontainer{
+            height: 350px;
+            width: 1200px;
+            background:url("images/hometagbackground.jpg") center;
+            color: white;
+        }
         .dropdown {
             position: relative;
             display: inline-block;
@@ -53,7 +89,7 @@ include 'connection.php';
     </style>
 </head>
 
-<body ng-app="info">
+<body>
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
 
@@ -72,7 +108,7 @@ include 'connection.php';
         <div class="collapse navbar-collapse">
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li class="active dropdown"><a href="hospitalInfo.php">Data Manipulation</a>
+                <li class="active dropdown"><a href="datamanipulation.php">Data Manipulation</a>
                     <ul class="dropdown-content">
                         <li class="second">
                             <a href="diesase.php">Disease</a>
@@ -85,8 +121,8 @@ include 'connection.php';
                         </li>
                     </ul>
                 </li>
-                <li><a href ="diseaseAndTreatment.php">Disease & Treatment</a></li>
-                <li><a href ="record.php">Record</a></li>
+                <li><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
             <ul class ="nav navbar-nav">
                 <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
@@ -96,18 +132,6 @@ include 'connection.php';
 </div>
 <hr>
 <hr>
-
-<div ng-view></div>
-<script>
-    angular.module('info',['ngRoute'])
-        .config(['$routeProvider', function($routeProvider){
-            $routeProvider
-                .when('/disease',{templateUrl: 'diesase_.php'})
-                .when('/department',{template:'这是电脑分类页面'})
-                .when('/hospital',{template:'这是打印机页面'})
-                .otherwise({redirectTo:'/'});
-        }]);
-</script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

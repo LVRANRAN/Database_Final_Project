@@ -12,12 +12,16 @@ if (isset($_POST['submit'])) {
     $_SESSION['email'] = $username;
 
    if ($username && $password) {
+       $con = "select urole from users where email = '$username' and password= '$password'";
+       $urole = mysqli_query($dbc,$con);
+       $role = mysqli_fetch_assoc($urole);
+       $_SESSION['role'] = $role['urole'];
        $sql = "select * from users where email = '$username' and password= '$password'";
        $result = mysqli_query($dbc, $sql);
        $rows = mysqli_num_rows($result);
        if ($rows) {//0 false 1 true
            echo "log in successfully!";
-           echo "                
+           echo "
                 <script>
                        setTimeout(function(){window.location.href='homepage.php';},1000);
                </script>";
@@ -26,16 +30,16 @@ if (isset($_POST['submit'])) {
            echo "
                 <script>
                        setTimeout(function(){window.location.href='login.php';},1000);
-               </script>
+                </script>
 
           ";
        }
    }else{
      echo "The form is incomplete!";
       echo "
-                  <script>
+                <script>
                          setTimeout(function(){window.location.href='homepage.php';},1000);
-                   </script>";
+                </script>";
   }
 }
 ?>
