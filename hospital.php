@@ -143,33 +143,6 @@ $update_Query = "UPDATE `hospital` SET `hname`='$data[1]',
 	}
 }
 
-$result = mysqli_query ($dbc,"select * from hospital");
-
-echo "<table border='auto' width ='auto' height='auto'>
-	<tr>
-	<th><h1>HOSPITAL ID<h1></th>
-	<th><h1>HOSPITAL NAME<h1></th>
-	<th><h1>HOSPITAL ADDRESS<h1></th>
-	<th><h1>HOSPITAL CITY<h1></th>
-	<th><h1>HOSPITAL STATE<h1></th>
-	<th><h1>ZIPCODE<h1></th>
-	
-	
-	<th>";
-
-while($row = mysqli_fetch_array($result))
-{	echo "<tr>";
-    echo "<td>".$row['hid']."</td>";
-    echo "<td>".$row['hname']."</td>";
-    echo "<td>".$row['hst_address']."</td>";
-    echo "<td>".$row['hst_city']."</td>";
-    echo "<td>".$row['hstate']."</td>";
-    echo "<td>".$row['hzip']."</td>";
-
-    echo "<tr>";
-
-}
-
 ?>
 
 
@@ -241,6 +214,7 @@ while($row = mysqli_fetch_array($result))
     </style>
 </head>
 <body>
+<div style="border:2px solid #a1a1a1; border-radius:25px;padding:50px 40px;width:1000px; text-align:center;margin-left:auto;margin-right: auto;margin-top: 100px;margin-bottom: 50px;" >
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
         <div class ="navbar-header">
@@ -251,7 +225,7 @@ while($row = mysqli_fetch_array($result))
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand">LPHospital</a>
 
         </div>
         <div class="collapse navbar-collapse">
@@ -259,7 +233,7 @@ while($row = mysqli_fetch_array($result))
             <ul class ="nav navbar-nav" id="ul1">
                 <li><a href="homepage.php">Home</a></li>
                 <li class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
-                <li id = <?php echo "$role"?>><a href ="dataanalysis.php">Data Analysis</a></li>
+                <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
             <ul class ="nav navbar-nav">
@@ -269,24 +243,66 @@ while($row = mysqli_fetch_array($result))
         </div>
     </div>
 </div>
-<br><br><br><br><br><br>
-<form action="hospital.php" method="POST">
-    <input type="number" name="hid" placeholder= "hid(3 digits)" value="<?php echo $hid;?>"><br><br>
-    <input type="text" name="hname" placeholder = "hname" value="<?php echo $hname;?>"><br><br>
-    <input type="text" name="hst_address" placeholder= "hst_address" value="<?php echo $hst_address;?>"><br><br>
-    <input type="text" name="hst_city" placeholder = "hst_city" value="<?php echo $hst_city;?>"><br><br>
-     <input type="text" name="hstate" placeholder = "hstate" value="<?php echo $hstate;?>"><br><br>
-    <input type="number" name="hzip" placeholder = "hzip(5 digits)" value="<?php echo $hzip;?>"><br><br>
-    
-    <div>
-        <input type="submit" name="insert" value="Add">
-        <input type="submit" name="update" value="Update">
-        <input type="submit" name="delete" value="Delete">
-        <input type="submit" name="search" value="Find">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-no-padding well">
+        <form action="department.php"  method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <input type="number" name="hid" placeholder= "hid(3 digits)" value="<?php echo $hid;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hname" placeholder = "hname" value="<?php echo $hname;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hst_address" placeholder= "hst_address" value="<?php echo $hst_address;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hst_city" placeholder = "hst_city" value="<?php echo $hst_city;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hstate" placeholder = "hstate" value="<?php echo $hstate;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="hzip" placeholder = "hzip(5 digits)" value="<?php echo $hzip;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="insert" value="Add" class="btn btn-primary" />
+                    <input type="submit" name="update" value="Update" class="btn btn-primary" />
+                    <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
+                    <input type="submit" name="search" value="Find" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
     </div>
-</form>
-<script>
-    document.getElementById("BA").remove();
-</script>
+</div>
+<?php
+$result = mysqli_query ($dbc,"select * from hospital");
+
+echo "<table align=\"center\" style=\"text-align: center;width: 900px; \" class=\"table table-striped\">
+    <caption><h1>Hospital Information</h1></caption>
+	<tr>
+	<th>HOSPITAL ID</th>
+	<th>HOSPITAL NAME</th>
+	<th>HOSPITAL ADDRESS</th>
+	<th>HOSPITAL CITY</th>
+	<th>HOSPITAL STATE</th>
+	<th>ZIPCODE</th>
+	
+	
+	<th>";
+
+while($row = mysqli_fetch_array($result))
+{	echo "<tr>";
+    echo "<td>".$row['hid']."</td>";
+    echo "<td>".$row['hname']."</td>";
+    echo "<td>".$row['hst_address']."</td>";
+    echo "<td>".$row['hst_city']."</td>";
+    echo "<td>".$row['hstate']."</td>";
+    echo "<td>".$row['hzip']."</td>";
+
+    echo "<tr>";
+
+}?>
+</div>
 </body>
 </html>

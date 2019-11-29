@@ -68,6 +68,33 @@ $role = $_SESSION['role'];
             background:url("images/hometagbackground.jpg") center;
             color: white;
         }
+        
+        
+
+ 
+.txtt {
+    /*绝对位置*/
+    position: absolute;
+    background: #C4E6E6;
+    /*透明度*/
+    opacity: 0.6;
+    /*span标签的大小*/
+    width: 600px;
+    height: 80px;
+    /*偏移到div上*/
+    left: 0;
+    top:400px;
+    /*span标签下移*/
+    bottom: 0.1px;
+    text-align: center;
+    color: white;
+    font-family: italic 2em Georgia, serif;
+    font-size: 60px;
+     text-shadow: 5px 5px 5px black;
+ 
+    
+}
+
 
     </style>
 
@@ -107,6 +134,18 @@ $role = $_SESSION['role'];
 
 <hr>
 <hr>
+
+<!-- pic -->
+<div class=hpic>
+
+
+<img src="images/home_pic.jpg" height="800px" width="100%"/>
+<span class="txtt">love & peace</span>
+
+</div>
+
+
+
 
 <!-- Footer -->
 <footer>

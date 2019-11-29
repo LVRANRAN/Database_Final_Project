@@ -170,27 +170,6 @@ $update_Query = "UPDATE `department` SET `dname`='$data[1]',
 	}
 }
 
-$result = mysqli_query ($dbc,"select * from department");
-
-echo "<table border='auto' width ='auto' height='auto'>
-	<tr>
-	<th><h1>DEPARTMENT ID<h1></th>
-	<th><h1>DEPARTMENT NAME<h1></th>
-	<th><h1>DEPARTMENT TEL<h1></th>
-	<th><h1>HOSPITAL ID<h1></th>
-	<th>";
-
-while($row = mysqli_fetch_array($result))
-{	echo "<tr>";
-    echo "<td>".$row['did']."</td>";
-    echo "<td>".$row['dname']."</td>";
-    echo "<td>".$row['dtel']."</td>";
-    echo "<td>".$row['hid']."</td>";
-
-    echo "<tr>";
-
-}
-
 ?>
 
 
@@ -260,7 +239,7 @@ while($row = mysqli_fetch_array($result))
 
     </style>
 </head>
-<body>
+<div style="border:2px solid #a1a1a1; border-radius:25px;padding:50px 40px;width:1000px; text-align:center;margin-left:auto;margin-right: auto;margin-top: 100px;margin-bottom: 50px;" >
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
         <div class ="navbar-header">
@@ -271,7 +250,7 @@ while($row = mysqli_fetch_array($result))
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand">LPHospital</a>
 
         </div>
 
@@ -279,7 +258,7 @@ while($row = mysqli_fetch_array($result))
 
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li  class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
                 <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>
@@ -290,24 +269,54 @@ while($row = mysqli_fetch_array($result))
         </div>
     </div>
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<form action="department.php" method="POST">
-    <input type="number" name="did" placeholder= "did(2 digits)" value="<?php echo $did;?>"><br><br>
-    <input type="text" name="dname" placeholder = "dname" value="<?php echo $dname;?>"><br><br>
-    <input type="text" name="dtel" placeholder= "dtel(eg:999-999-9999)" value="<?php echo $dtel;?>"><br><br>
-    <input type="number" name="hid" placeholder = "hid(3 digits)" value="<?php echo $hid;?>"><br><br>
-    
-    <div>
-        <input type="submit" name="insert" value="Add">
-        <input type="submit" name="update" value="Update">
-        <input type="submit" name="delete" value="Delete">
-        <input type="submit" name="search" value="Find">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-no-padding well">
+        <form action="department.php"  method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <input type="number" name="did" placeholder= "did(2 digits)" value="<?php echo $did;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dname" placeholder = "dname" value="<?php echo $dname;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dtel" placeholder= "dtel(eg:999-999-9999)" value="<?php echo $dtel;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="hid" placeholder = "hid(3 digits)" value="<?php echo $hid;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="insert" value="Add" class="btn btn-primary" />
+                    <input type="submit" name="update" value="Update" class="btn btn-primary" />
+                    <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
+                    <input type="submit" name="search" value="Find" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
     </div>
-</form>
+</div>
+<?php
+$result = mysqli_query ($dbc,"select * from department");
+
+echo "<table align=\"center\" style=\"text-align: center;width: 700px; \" class=\"table table-striped\">
+    <caption><h1>Department Information</h1></caption>
+	<tr>
+	<th>DEPARTMENT ID</th>
+	<th>DEPARTMENT NAME</th>
+	<th>DEPARTMENT TEL</th>
+	<th>HOSPITAL ID</th>
+	<th>";
+
+while($row = mysqli_fetch_array($result))
+{	echo "<tr>";
+    echo "<td>".$row['did']."</td>";
+    echo "<td>".$row['dname']."</td>";
+    echo "<td>".$row['dtel']."</td>";
+    echo "<td>".$row['hid']."</td>";
+
+    echo "<tr>";
+
+}?>
+</div>
 </body>
 </html>
