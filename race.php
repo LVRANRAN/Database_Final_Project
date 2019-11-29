@@ -2,8 +2,9 @@
 <?php
 
 session_start();
+$email = $_SESSION['email'];
+$role = $_SESSION['role'];
 include 'connection.php';
-include 'function.php';
 
 $dataM = 8 ;
 $dataT = 8;
@@ -15,51 +16,10 @@ $PM = 8;
 $PW = 8;
 $PS = 8;
 
-$con = mysql_connect("localhost","root","");
-if(!$con)
-{
-  die('数据库连接失败'.mysql_error());
-}
-
-if(!$con)
-{
- die('数据库连接失败'.mysql_error());
-}
-else
-{
-   mysql_query("set names utf8");
-   mysql_select_db("F196083B",$con);
-}
-
-
-
-mysql_select_db("patinet",$con);
-/*$sql = "select * from hospital";
-$data = mysql_query($sql)
-while($row = mysql_fetch_array($data))
-{
-   if($row[PSTATUS]="W") $W_num++;
-   else if ($row[PSTATUS]="M") $M_num++;
-   else  $S_num++;
-   
-
-}*/
-
-//正确
-/*$sql = "select count(PSTATUS) from `patient` group by PSTATUS ";
-//$sql="SELECT COUNT(PSTATUS) FROM `patinet` GROUP BY PSTATUS";
-$result=mysql_query($sql);
-while($row=mysql_fetch_row($result))
-{
-	echo $row[0];
-	echo "<br/>";
-
-}*/
-
 $sql1 = "select count(*) from `patient` ";
 
-$resultT=mysql_query($sql1);
-while($rowT=mysql_fetch_row($resultT))
+$resultT=mysqli_query($dbc,$sql1);
+while($rowT=mysqli_fetch_row($resultT))
 {
 	//echo $rowT[0];
 	$dataT = $rowT[0];
@@ -69,8 +29,8 @@ while($rowT=mysql_fetch_row($resultT))
 
 $sql2 = "select count(PRACE) from `patient` where PRACE='ASIAN' ";
 
-$resultM=mysql_query($sql2);
-while($rowM=mysql_fetch_row($resultM))
+$resultM=mysqli_query($dbc,$sql2);
+while($rowM=mysqli_fetch_row($resultM))
 {
 	//echo $rowM[0];
 	$dataM = $rowM[0];
@@ -80,8 +40,8 @@ while($rowM=mysql_fetch_row($resultM))
 
 $sql3 = "select count(PRACE) from `patient` where PRACE='AFRICAN' ";
 
-$resultW=mysql_query($sql3);
-while($rowW=mysql_fetch_row($resultW))
+$resultW=mysqli_query($dbc,$sql3);
+while($rowW=mysqli_fetch_row($resultW))
 {
 	//echo $rowW[0];
 	$dataW = $rowW[0];
@@ -93,9 +53,9 @@ while($rowW=mysql_fetch_row($resultW))
 
 $sql4 = "select count(PRACE) from `patient` where PRACE='LATINO' ";
 
-$resultS=mysql_query($sql4);
+$resultS=mysqli_query($dbc,$sql4);
 
-while($rowS=mysql_fetch_row($resultS))
+while($rowS=mysqli_fetch_row($resultS))
 {
 	//echo $rowS[0];
 	$dataS = $rowS[0];
@@ -124,29 +84,214 @@ while($rowS=mysql_fetch_row($resultS))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>饼状图</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>FunFunFunding</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+   
+   
+   
+   
+      <style>
+    
+    .txtt {
+    /*绝对位置*/
+    position: absolute;
+    background: #C4E6E6;
+    /*透明度*/
+    opacity: 0.6;
+    /*span标签的大小*/
+    width: 600px;
+    height: 150px;
+    /*偏移到div上*/
+    left: 0;
+    top:400px;
+    /*span标签下移*/
+    bottom: 0.1px;
+    text-align: center;
+    color: white;
+    font-family: italic 2em Georgia, serif;
+    font-size: 65px;
+     text-shadow: 5px 5px 5px black;
+     z-index: 5;
+ 
+    
+}
+   
+    
+    
+    	/*为了能够设置两个标签叠加在一起，需要设置其父标签*/
+	.father{
+		/*标签位置设置为相对的*/
+		position: relative;
+		text-align: center;
+		width: 900px;
+	}
+	/*canvas的大小需要在起标签内设置，否则会拉伸或缩小默认的大小*/
+	.canvas{
+		
+		/*位置绝对*/
+		position: absolute;
+		top: 0;
+		left: 0;
+		/*设置所在层数，在上层*/
+		z-index: 1;
+	}
+	/*需要将img背景图的尺寸和canvas的尺寸设置相同*/
+	.canvas_bgp{
+		width: 1280px;
+		height: 900px;
+		/*位置绝对*/
+		position: absolute;
+		top: 0;
+		left: 0;
+		}
+    
+    
+    
+    
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .second {
+            color: #555555;
+            list-style-type:none
+        }
+        .title{
+            color: #FFFFFF;
+        }
+
+        .navbar-brand{
+            font-size: 1.8em;
+        }
+
+
+        #topRow h1 {
+            font-size: 300%;
+
+        }
+
+        .center{
+            text-align: center;
+        }
+
+        .title{
+            margin-top: 100px;
+            font-size: 300%;
+        }
+
+        #footer {
+            background-color: #B0D1FB;
+        }
+
+        .marginBottom{
+            margin-bottom: 30px;
+        }
+
+        .tagcontainer{
+            height: 350px;
+            width: 1200px;
+            background:url("images/hometagbackground.jpg") center;
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
-<div> <p>   patient RACE statistics </p></div>
-<canvas id="canvas"></canvas>
-<script>
+<div class ="navbar-default navbar-fixed-top">
+    <div class = "container">
 
+        <div class ="navbar-header">
+            <button class ="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+
+            </button>
+            <a class="navbar-brand">LPHospital</a>
+
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class ="nav navbar-nav">
+                <li><a href="homepage.php">Home</a></li>
+                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li class="active dropdown"><a href ="dataanalysis.php">Data Analysis</a>
+                    <ul class="dropdown-content">
+                        <li class="second">
+                            <a href="dataanalysis.php">Patient Status</a>
+                        </li>
+                        <li class="second">
+                            <a href="race.php">Patient Race</a>
+                        </li>
+                        <li class="second">
+                            <a href="hospital_state.php">Hospital State</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href ="createRecord.php">Create Record</a></li>
+            </ul>
+            <ul class ="nav navbar-nav">
+                <li><?php echo "<a>Hello, " .$email. "!</a>"?></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div align="center" class="father">
+		<canvas class="canvas"  id="canvas"></canvas>
+		<img src="images/fenxi.jpg" class="canvas_bgp">
+		<span class="txtt"> patient race percent</span>
+	</div>
+	
+
+<script type="text/javascript">
+    //document.getElementById("BA").remove();
+    
     (function () {
         var data = [{
             "value":<?php echo "$PM" ?>,
             //"color":"#FFCC66",
-            "color":"red",
+            "color":"#ff3333",
             "name":"ASIAN"
         },{
             "value":<?php echo "$PW" ?>,
            // "color":"#CC0000",
-             "color":"green",
+             "color":"#8B4726",
             "name":"AFRICAN"
         },{
             "value":<?php echo"$PS" ?>,
            // "color":"#99CCFF",
-              "color":"blue",
+              "color":"#96CDCD",
             "name":"LATINO"
         }/*,{
             "value":"0.1",
@@ -154,16 +299,30 @@ while($rowS=mysql_fetch_row($resultS))
             "name":"PHP"
         }*/];
        var canvas = document.getElementById("canvas");
-       //设置宽高不从css中设置
-       canvas.width = 600;//设置canvas宽
-       canvas.height = 600;//设置canvas高
-       //canvas.style.border = "1px solid red";
+        //设置宽高不从css中设置
+        canvas.width = 1280;//设置canvas宽
+        canvas.height = 800;//设置canvas高
+       
+        //canvas.style.border = "1px solid red";
+        
+        
+       /* img = new Image();
+        img.src = "images/fenxi.jpg" ;
+        img.onload = function()
+        {	
+  	      var ptrn=context.createpattern;
+  	      context.fillStyle = ptrn;
+  	      context.fillRect(0,0,800,600);
+        
+        }*/
+
+        
         //获取上下文
-       var ctx = canvas.getContext("2d");
-       //画图
-        var x0  = 300,y0 = 300;//圆心
+        var ctx = canvas.getContext("2d");
+        //画图
+        var x0  = 950,y0 = 350;//圆心
         var x,y;//文字放置位置
-        var radius = 100;
+        var radius = 150;
         var tempAngle = -90;//画圆的起始角度
         for(var i = 0;i<data.length;i++){
             var startAngle = tempAngle*Math.PI/180;//起始弧度
@@ -177,11 +336,15 @@ while($rowS=mysql_fetch_row($resultS))
                 ctx.textAlign = 'end';
             }
             var text = data[i].name + " "+ data[i].value*100+"%";
+        
+          
+         
+            
             ctx.fillText(text,x,y);
             ctx.beginPath();
             ctx.moveTo(x0,y0);
             ctx.fillStyle = data[i].color;
-            
+
             ctx.arc(x0,y0,radius,startAngle,endAngle);
             ctx.fill();
             tempAngle += angle;

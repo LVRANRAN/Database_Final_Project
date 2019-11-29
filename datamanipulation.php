@@ -101,7 +101,7 @@ include 'connection.php';
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand">LPHospital</a>
 
         </div>
 

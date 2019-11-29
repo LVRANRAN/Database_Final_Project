@@ -23,7 +23,7 @@ if (isset($_POST['search'])) {
 
     $search_Query = "SELECT * FROM DISEASE WHERE deid = $data[0]";
 
-    $search_Result = mysqli_query($dbc, $search_Query);
+    $search_Result = mysqli_query($dbc,$search_Query);
 
     if ($search_Result) {
         if (mysqli_num_rows($search_Result)) {
@@ -106,27 +106,7 @@ if (isset($_POST['update'])) {
 }
 
 //generate data table
-$result = mysqli_query($dbc,"select * from disease");
 
-echo "<table class=\"table table-striped\">
-    <caption><h1>Disease Information</h1></caption>
-    <thead>
-    	<tr>
-	        <th>DISEASE ID</th>
-	        <th>DISEASE NAME</th>
-	    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-";
-	
-while($row = mysqli_fetch_array($result))
-{	echo "<tr>";
-	echo "<td>".$row['deid']."</td>";
-	echo "<td>".$row['dename']."</td>";
-	echo "<tr>";
-
-}
 
 ?>
 
@@ -196,6 +176,7 @@ while($row = mysqli_fetch_array($result))
     </style>
 </head>
 <body>
+<div style="border:2px solid #a1a1a1; border-radius:25px;padding:50px 40px;width:1000px; text-align:center;margin-left:auto;margin-right: auto;margin-top: 100px;margin-bottom: 50px;" >
 <div class ="navbar-default navbar-fixed-top">
     <div class = "container">
         <div class ="navbar-header">
@@ -206,7 +187,7 @@ while($row = mysqli_fetch_array($result))
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand">LPHospital</a>
 
         </div>
 
@@ -226,20 +207,45 @@ while($row = mysqli_fetch_array($result))
     </div>
 </div>
 
-<hr>
-<hr>
-<fg2>
-    <form onsubmit="return PostData()"  method="POST">
-        <fg1> <input type="number" name="deid" placeholder= "diseaseid" value="<?php echo $deid;?>"><br><br></fg1>
-        <fg1> <input type="text" name="dename" placeholder = "diseasename" value="<?php echo $dename;?>"><br><br></fg1>
-        <div>
-            <fg2>  <input type="submit" name="insert" value="Add"></fg2>
-            <fg2> <input type="submit" name="update" value="Update"></fg2>
-            <fg2> <input type="submit" name="delete" value="Delete"></fg2>
-            <fg2> <input type="submit" name="search" value="Find"></fg2>
-        </div>
-    </form></fg2>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-no-padding well">
+        <form onsubmit="return PostData()"  method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <input type="number" name="deid" placeholder= "diseaseid" value="<?php echo $deid;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dename" placeholder = "diseasename" value="<?php echo $dename;?>" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="insert" value="Add" class="btn btn-primary" />
+                    <input type="submit" name="update" value="Update" class="btn btn-primary" />
+                    <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
+                    <input type="submit" name="search" value="Find" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<?php
+$result = mysqli_query($dbc,"select * from disease");
+echo "<table align=\"center\" style=\"text-align: center;width: 600px; \" class=\"table table-striped\">
+    <caption><h1>Disease Information</h1></caption>
+	<tr>
+	<th style=\"text-align: center;\">DISEASE ID</th>
+	<th style=\"text-align: center;\">DISEASE NAME</th>
+	
+	<th>
+";
 
+while($row = mysqli_fetch_array($result))
+{	echo "<tr>";
+    echo "<td>".$row['deid']."</td>";
+    echo "<td>".$row['dename']."</td>";
+    echo "<tr>";
+
+}?>
+</div>
  </body>
 <script>
     function PostData() {
