@@ -59,7 +59,7 @@ if(isset($_POST['search']))
 if(isset($_POST['insert']))
 {  
 
-$tmp = mysqli_query($connect, "select max(did) as did from department");
+$tmp = mysqli_query($dbc, "select max(did) as did from department");
 $row = $tmp->fetch_assoc();
 $did_new = $row['did'] + 1;
 
@@ -68,7 +68,7 @@ $did_new = $row['did'] + 1;
 //$result = $mysqli->query($sql)
 //$hid_all = mysqli_fetch_all($result);
 
-$tmpp = mysqli_query($connect, "select hid from hospital");
+$tmpp = mysqli_query($dbc, "select hid from hospital");
 $hid_all  = $tmpp->fetch_assoc();
 
 
@@ -79,7 +79,8 @@ $data = getPosts();
 		
 		{	
 		    $insert_Query = "INSERT INTO `department`(`did`, `dname`, `dtel`, `hid`)
-			 VALUES ($did_new,'$data[1]','$data[2]',$data[3])";
+			 VALUES ($did_new,'$data[1]',$data[2],$data[3])";
+            $insert_Result = mysqli_query($dbc, $insert_Query);
 			  echo 'Data Inserted';
          }
 
@@ -90,7 +91,7 @@ $data = getPosts();
    
 		else 
 		{
-    		echo 'worng hid';
+    		echo 'wrong hid';
     	
     	 }
 }
@@ -126,11 +127,11 @@ $data = getPosts();
 $delete_Query = "DELETE FROM `department`  WHERE `did` = $data[0]";
 	try
 	{
-		$delete_Result = mysqli_query($connect,$delete_Query);
+		$delete_Result = mysqli_query($dbc,$delete_Query);
 		
 		if($delete_Result)
 		{
-	     if(mysqli_affected_rows($connect) > 0)
+	     if(mysqli_affected_rows($dbc) > 0)
 	     {
 	        echo 'Data deleted';
 	     }	
@@ -139,7 +140,7 @@ $delete_Query = "DELETE FROM `department`  WHERE `did` = $data[0]";
 	      	echo 'Data Not deleted';
 	      }
 	    }
-	} catch (Exception $ex){ 
+	} catch (Exception $ex){
 	 	 echo 'ERROR delete'.$ex->getMessage();
 	}
 }
@@ -152,11 +153,11 @@ $update_Query = "UPDATE `department` SET `dname`='$data[1]',
 `dtel`='$data[2]',`hid`=$data[3] WHERE `did`= $data[0]";
 	try
 	{
-		$update_Result = mysqli_query($connect,$update_Query);
+		$update_Result = mysqli_query($dbc,$update_Query);
 		
 		if($update_Result)
 		{
-	     if(mysqli_affected_rows($connect) > 0)
+	     if(mysqli_affected_rows($dbc) > 0)
 	     {
 	        echo 'Data updated';
 	     }	
@@ -182,7 +183,7 @@ $update_Query = "UPDATE `department` SET `dname`='$data[1]',
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>FunFunFunding</title>
+    <title>LPHospital</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -258,7 +259,7 @@ $update_Query = "UPDATE `department` SET `dname`='$data[1]',
 
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li class="active"><a href="diesase.php">Data Manipulation</a></li>
                 <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>

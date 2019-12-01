@@ -38,7 +38,7 @@ if (isset($_POST['create_record'])) {
     <title>Create Record</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" >
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <title>FunFunFunding</title>
+    <title>LPHospital</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -110,14 +110,14 @@ if (isset($_POST['create_record'])) {
                     <span class="icon-bar"></span>
 
                 </button>
-                <a class="navbar-brand">FFFunding</a>
+                <a class="navbar-brand">LPHospital</a>
 
             </div>
 
             <div class="collapse navbar-collapse">
                 <ul class ="nav navbar-nav">
                     <li><a href="homepage.php">Home</a></li>
-                    <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                    <li id = <?php echo "$role"?>><a href="diesase.php">Data Manipulation</a></li>
                     <li><a href ="dataanalysis.php">Data Analysis</a></li>
                     <li class="active"><a href ="record.php">Create Record</a></li>
                 </ul>

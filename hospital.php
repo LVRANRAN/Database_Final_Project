@@ -65,7 +65,7 @@ if(isset($_POST['search']))
 if(isset($_POST['insert']))
 {  
 
-$tmp = mysqli_query($connect, "select max(hid) as hid from hospital");
+$tmp = mysqli_query($dbc, "select max(hid) as hid from hospital");
 $row = $tmp->fetch_assoc();
 $hid_new = $row['hid'] + 1;
 
@@ -99,11 +99,11 @@ $data = getPosts();
 $delete_Query = "DELETE FROM `hospital`  WHERE `hid` = $data[0]";
 	try
 	{
-		$delete_Result = mysqli_query($connect,$delete_Query);
+		$delete_Result = mysqli_query($dbc,$delete_Query);
 		
 		if($delete_Result)
 		{
-	     if(mysqli_affected_rows($connect) > 0)
+	     if(mysqli_affected_rows($dbc) > 0)
 	     {
 	        echo 'Data deleted';
 	     }	
@@ -125,11 +125,11 @@ $update_Query = "UPDATE `hospital` SET `hname`='$data[1]',
 `hst_address`='$data[2]',`hst_city`='$data[3]',`hstate`='$data[4]', `hzip`=$data[5] WHERE `hid`= $data[0]";
 	try
 	{
-		$update_Result = mysqli_query($connect,$update_Query);
+		$update_Result = mysqli_query($dbc,$update_Query);
 		
 		if($update_Result)
 		{
-	     if(mysqli_affected_rows($connect) > 0)
+	     if(mysqli_affected_rows($dbc) > 0)
 	     {
 	        echo 'Data updated';
 	     }	
@@ -232,7 +232,7 @@ $update_Query = "UPDATE `hospital` SET `hname`='$data[1]',
 
             <ul class ="nav navbar-nav" id="ul1">
                 <li><a href="homepage.php">Home</a></li>
-                <li class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li class="active"><a href="diesase.php">Data Manipulation</a></li>
                 <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>

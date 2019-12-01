@@ -73,10 +73,9 @@ $PS=round($PS,2);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>FunFunFunding</title>
+    <title>LPHospital</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -207,7 +206,7 @@ $PS=round($PS,2);
         }
 
         .navbar-brand{
-            font-size: 1.8em;
+            font-size: 2.8em;
         }
 
 
@@ -256,14 +255,14 @@ $PS=round($PS,2);
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand" style="font-size: 1.8em">LPHospital</a>
 
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li id = <?php echo "$role"?>><a href="diesase.php">Data Manipulation</a></li>
                 <li class="active dropdown"><a href ="dataanalysis.php">Data Analysis</a>
                     <ul class="dropdown-content">
                         <li class="second">
@@ -377,10 +376,7 @@ $PS=round($PS,2);
     }());
 </script>
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+
 
 <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
 
@@ -430,6 +426,11 @@ $PS=round($PS,2);
         }
     });
 </script>
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.js"></script>
 </body>
 </html>

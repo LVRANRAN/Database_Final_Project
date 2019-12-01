@@ -115,7 +115,6 @@ while($rowH=mysqli_fetch_row($resultH))
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>FunFunFunding</title>
@@ -266,7 +265,7 @@ while($rowH=mysqli_fetch_row($resultH))
         <div class="collapse navbar-collapse">
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li id = <?php echo "$role"?>><a href="diesase.php">Data Manipulation</a></li>
                 <li class="active dropdown"><a href ="dataanalysis.php">Data Analysis</a>
                     <ul class="dropdown-content">
                         <li class="second">
