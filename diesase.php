@@ -118,7 +118,7 @@ if (isset($_POST['update'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>FunFunFunding</title>
+    <title>LPHospital</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -172,6 +172,25 @@ if (isset($_POST['update'])) {
             background:url("images/hometagbackground.jpg") center;
             color: white;
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .second {
+            color: #555555;
+            list-style-type:none
+        }
 
     </style>
 </head>
@@ -195,7 +214,18 @@ if (isset($_POST['update'])) {
 
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li  class="active"><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li  class="active dropdown"><a href="diesase.php">Data Manipulation</a>
+                    <ul class="dropdown-content">
+                        <li class="second">
+                            <a href="diesase.php">Disease</a>
+                        </li>
+                        <li class="second">
+                            <a href="department.php">Department</a>
+                        </li>
+                        <li class="second">
+                            <a href="hospital.php">Hospital</a>
+                        </li>
+                    </ul></li>
                 <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>

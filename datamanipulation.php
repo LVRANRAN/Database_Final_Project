@@ -14,7 +14,7 @@ include 'connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>FunFunFunding</title>
+    <title>LPHospital</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -108,7 +108,7 @@ include 'connection.php';
         <div class="collapse navbar-collapse">
             <ul class ="nav navbar-nav">
                 <li><a href="homepage.php">Home</a></li>
-                <li class="active dropdown"><a href="datamanipulation.php">Data Manipulation</a>
+                <li class="active dropdown"><a href="diesase.php">Data Manipulation</a>
                     <ul class="dropdown-content">
                         <li class="second">
                             <a href="diesase.php">Disease</a>

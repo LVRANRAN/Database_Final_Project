@@ -112,7 +112,7 @@ $role = $_SESSION['role'];
                 <span class="icon-bar"></span>
 
             </button>
-            <a class="navbar-brand">FFFunding</a>
+            <a class="navbar-brand">LPHospital</a>
 
         </div>
 
@@ -120,7 +120,7 @@ $role = $_SESSION['role'];
 
             <ul class ="nav navbar-nav">
                 <li class="active"><a href="homepage.php">Home</a></li>
-                <li id = <?php echo "$role"?>><a href="datamanipulation.php">Data Manipulation</a></li>
+                <li id = <?php echo "$role"?>><a href="diesase.php">Data Manipulation</a></li>
                 <li><a href ="dataanalysis.php">Data Analysis</a></li>
                 <li><a href ="createRecord.php">Create Record</a></li>
             </ul>

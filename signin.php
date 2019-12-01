@@ -8,7 +8,7 @@ $error = false;
 //check if form is submitted
 if (isset($_POST['submit'])) {
     $username = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    $password = md5(trim($_POST['password']));
     $_SESSION['email'] = $username;
 
    if ($username && $password) {

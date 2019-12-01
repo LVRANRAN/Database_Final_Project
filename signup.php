@@ -42,7 +42,7 @@ if (isset($_POST['signup'])) {
     }
     if (!$error) {
         if(mysqli_query($dbc,"INSERT INTO users VALUES($uid,'".$fname."','".$lname."','".$urole."',$department_id,'".$email."','".md5($password)."')")) {
-            $successmsg = "Successfully Registered! <a href='homepage.php'>Click here to Login</a>";
+            $successmsg = "Successfully Registered! <a href='signin.php'>Click here to Login</a>";
         } else {
             $errormsg = "Error in registering...Please try again later!";
         }
